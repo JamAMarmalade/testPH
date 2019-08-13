@@ -20,7 +20,7 @@
       When I delete the body of "comments" number "12"
 
       When I get the body of "comments" number "12"
-      Then I can see the response "modi ut eos dolores illum nam dolor" in "name" is "false"
+      Then I can see the response "modi ut eos dolores illum nam dolor" in "name" is "true"
 
     Scenario: A user wants to patch an entry in their album
       Given I want to operate on "jsonplaceholder.typicode.com"
@@ -34,17 +34,19 @@
     Scenario: A user wants to post an entry in their album
       Given I want to operate on "jsonplaceholder.typicode.com"
       And I want to intitialise a post request to "albums" with "title" to "101"
-      When I post the body of "albums" number "101" with status "404"
-      Then I can see the response "Le coeur a ses raisons que le raison ne connait point" in "title" is "false"
+      When I post the body of "albums" number "101" with status "200"
+      Then I can see the response "Le coeur a ses raisons que le raison ne connait point" in "title" is "true"
+
+      When I get the body of "albums" number "101" with "404"
 
 
     Scenario: A user wants to put an entry in their album
       Given I want to operate on "jsonplaceholder.typicode.com"
       And I want to intitialise a put request to "albums" with "trust the process" in "title" to "3"
-      When I get the body of "albums" number "3"
+      When I put the body of "albums" number "3"
       Then I can see the response "trust the process" in "title" is "true"
 
-      When I get the body of "albums" number "2"
+      When I get the body of "albums" number "3"
       Then I can see the response "trust the process" in "title" is "false"
 
 

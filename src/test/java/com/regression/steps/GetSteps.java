@@ -61,6 +61,14 @@ public class GetSteps extends ApiPaths{
         Assert.assertEquals(apiResponse.getResponseCode(), 200);
     }
 
+    @Step("I get the body of {type} number {num} with {code}")
+    @When("I get the body of \"([^\"]*)\" number \"([^\"]*)\" with \"([^\"]*)\"$")
+    public void i_get_the_body_of_number_with(String type, String num, int code) {
+        apiResponse = placeHolder.GetDetails(type, num);
+        Assert.assertEquals(apiResponse.getResponseCode(), code);
+    }
+
+
     @Step("I delete the body of {type} number {num]")
     @When("^I delete the body of \"([^\"]*)\" number \"([^\"]*)\"$")
     public void iDeleteTheBodyOfNumber(String type, String num) {
@@ -79,7 +87,15 @@ public class GetSteps extends ApiPaths{
     @When("^I post the body of \"([^\"]*)\" number \"([^\"]*)\" with status \"([^\"]*)\"$")
     public void iPostTheBodyOfNumberWithStatus(String type, String num, int code) {
         apiResponse = placeHolder.PatchDetails(type, num, JsonBody);
-        Assert.assertEquals(apiResponse.getResponseCode(), code);
+        int a = apiResponse.getResponseCode();
+        Assert.assertEquals(a, code);
+    }
+
+    @Step("I put the body of {type} number {num]")
+    @When("^I put the body of \"([^\"]*)\" number \"([^\"]*)\"$")
+    public void i_put_the_body_of_number(String type, String num) {
+        apiResponse = placeHolder.PatchDetails(type, num, JsonBody);
+        Assert.assertEquals(apiResponse.getResponseCode(), 200);
     }
 
     @Step("I can see the response {apiValue} in {apiKey} is {bool}")
@@ -89,7 +105,7 @@ public class GetSteps extends ApiPaths{
                 .getResponse()
                 .getAsJsonObject()
                 .get(apiKey)
-                .toString()
+                .getAsString()
                 .equals(apiValue));
     }
 }
