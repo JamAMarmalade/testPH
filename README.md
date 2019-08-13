@@ -2,7 +2,7 @@
 PlaceHolder api Test
 
 # to run
-gradlew build test 
+gradle test 
 
 test https://jsonplaceholder.typicode.com/
 
