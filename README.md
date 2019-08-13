@@ -1,7 +1,7 @@
 # testPH
 PlaceHolder api Test
 
-#to run
+# to run
 gradlew build test 
 
 test https://jsonplaceholder.typicode.com/
