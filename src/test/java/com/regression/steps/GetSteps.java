@@ -85,7 +85,7 @@ public class GetSteps extends ApiPaths{
     @Step("I can see the response {apiValue} in {apiKey} is {bool}")
     @Then("^I can see the response \"([^\"]*)\" in \"([^\"]*)\" is \"([^\"]*)\"$")
     public void iCanSeeTheResponseIs(String apiValue, String apiKey, String bool) {
-        Assert.assertTrue(Boolean.valueOf("bool") == apiResponse
+        Assert.assertTrue(Boolean.valueOf(bool) == apiResponse
                 .getResponse()
                 .getAsJsonObject()
                 .get(apiKey)
