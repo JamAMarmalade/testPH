@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+    id 'io.qameta.allure' version "2.7.0"
+}
+
+group 'QA-JSON'
+version '1.0-SNAPSHOT'
+
+task cucumber() {
+    dependsOn assemble, compileTestJava
+    doLast {
+        javaexec {
+            main = "cucumber.api.cli.Main"
+            classpath = configurations.cucumberRuntime + sourceSets.main.output + sourceSets.test.output
+            args = ['--format', 'html:cucumber-html-report', '--plugin', 'pretty', '--glue', 'com.regression.steps', 'src/test/resources']
+        }
+    }
+}
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'io.rest-assured:rest-assured:3.3.0'
+    testCompile 'io.cucumber:cucumber-java:4.2.0'
+    testCompile 'io.cucumber:cucumber-junit:4.2.0'
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.2'
+    compile group: 'ch.qos.logback', name:'logback-classic', version: '1.0.9'
+    compile group: 'ch.qos.logback', name:'logback-core', version: '1.0.9'
+    compile group: 'io.qameta.allure', name: 'allure-cucumber4-jvm', version: '2.9.0'
+    compile group: 'io.qameta.allure', name: 'allure-gradle', version: '2.7.0'
+    compile "com.microsoft.sqlserver:mssql-jdbc:6.2.1.jre8"
+}
+
+allure {
+    version = '2.7.0'
+    aspectjweaver = true
+    boolean clean = true
+    resultsDir = file('build/allure-results')
+    reportDir = file('build/reports/allure-report')
+    String configuration = 'testCompile'
+
+}
