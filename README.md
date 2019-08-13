@@ -1,7 +1,10 @@
 # testPH
 PlaceHolder api Test
 
-gradlew build test
+#to run
+gradlew build test 
+
+test https://jsonplaceholder.typicode.com/
 
 Not RESTful
 404 on post request
